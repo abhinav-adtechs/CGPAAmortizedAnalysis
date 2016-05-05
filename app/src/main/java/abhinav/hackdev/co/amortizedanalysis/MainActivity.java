@@ -1,9 +1,7 @@
 package abhinav.hackdev.co.amortizedanalysis;
 
-import android.content.Entity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.XAxis;
@@ -11,12 +9,11 @@ import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
-import com.github.mikephil.charting.data.Entry;
 import com.pixelcan.inkpageindicator.InkPageIndicator;
 
+import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,6 +27,12 @@ public class MainActivity extends AppCompatActivity {
 
     private List<BarEntry> yVals ;
     private ArrayList<String> xVals ;
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,15 +68,14 @@ public class MainActivity extends AppCompatActivity {
 
         yVals = new ArrayList<>();
 
-        for(int j=1 ; j< 9 ; j++){
-            updateChart(j*2, j-1);
-        }
+       /* for(int j=1 ; j< 9 ; j++){
+            updateChartData(j*2, j-1);
+        }*/
 
 
     }
 
-    @Subscribe
-    public void updateChart(int val, int index){
+    public void updateChartData(float val, int index){
         yVals.add(new BarEntry(val, index)) ;
 
 
@@ -85,5 +87,17 @@ public class MainActivity extends AppCompatActivity {
 
         barChart.animateXY(2000, 2000) ;
         barChart.invalidate();
+    }
+
+    @Subscribe
+    public void updateChartFromGPA(DataUpdateEvent dataUpdateEvent){
+        updateChartData(dataUpdateEvent.getDataValue(), dataUpdateEvent.getDataIndex());
+        customViewPager.setCurrentItem(customViewPager.getCurrentItem()+1);
+    }
+
+    @Override
+    protected void onDestroy() {
+        EventBus.getDefault().unregister(this);
+        super.onDestroy();
     }
 }
