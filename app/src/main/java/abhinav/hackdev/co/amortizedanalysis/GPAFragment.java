@@ -9,8 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 public class GPAFragment extends Fragment{
 
     private TextView textView ;
