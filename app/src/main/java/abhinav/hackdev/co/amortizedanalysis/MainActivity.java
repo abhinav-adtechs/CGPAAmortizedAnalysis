@@ -1,5 +1,6 @@
 package abhinav.hackdev.co.amortizedanalysis;
 
+import android.content.Entity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,6 +14,8 @@ import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.Entry;
 import com.pixelcan.inkpageindicator.InkPageIndicator;
 
+import org.greenrobot.eventbus.Subscribe;
+
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +28,8 @@ public class MainActivity extends AppCompatActivity {
     private InkPageIndicator inkPageIndicator ;
     private BarChart barChart ;
 
-    
+    private List<BarEntry> yVals ;
+    private ArrayList<String> xVals ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,31 +55,35 @@ public class MainActivity extends AppCompatActivity {
 
         getData() ;
 
-        barChart.animateXY(2000, 2000) ;
-        barChart.invalidate();
-
     }
 
     public void getData() {
-        ArrayList<String> xVals = new ArrayList<>() ;
+        xVals = new ArrayList<>() ;
         for (int i = 1; i < 9; i++) {
             xVals.add("SEM " + i);
         }
 
-        List<BarEntry> yVals = new ArrayList<>();
+        yVals = new ArrayList<>();
 
         for(int j=1 ; j< 9 ; j++){
-            Log.d(TAG, "getData: " + j*2);
-            yVals.add(new BarEntry(j*2, j-1)) ;
+            updateChart(j*2, j-1);
         }
+
+
+    }
+
+    @Subscribe
+    public void updateChart(int val, int index){
+        yVals.add(new BarEntry(val, index)) ;
+
 
         BarDataSet barDataSet = new BarDataSet(yVals, "GPA") ;
         BarData barData = new BarData(xVals, barDataSet) ;
 
         barChart.setData(barData);
-    }
+        barChart.notifyDataSetChanged();
 
-    public void updateChart(){
-
+        barChart.animateXY(2000, 2000) ;
+        barChart.invalidate();
     }
 }
