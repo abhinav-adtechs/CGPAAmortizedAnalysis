@@ -16,7 +16,6 @@ import org.greenrobot.eventbus.EventBus;
 
 public class GPAFragment extends Fragment implements View.OnClickListener{
 
-    private static final String TAG = "Fragment";
     private TextView textView ;
     private Button btnGPA ;
     private EditText etGPA ;
@@ -57,9 +56,8 @@ public class GPAFragment extends Fragment implements View.OnClickListener{
     @Override
     public void onClick(View v) {
         if(v.getId() == R.id.button){
-            Log.d(TAG, "onClick: BUTTON");
-            Log.d(TAG, "onClick: " + etGPA.getText().toString());
             if(!etGPA.getText().toString().isEmpty()){
+                GPAList.newInstance().addToList(Float.parseFloat(etGPA.getText().toString()), position);
                 EventBus.getDefault().post(new DataUpdateEvent(Float.parseFloat(etGPA.getText().toString()), position));
             }
         }

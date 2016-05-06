@@ -28,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
     private List<BarEntry> yVals ;
     private ArrayList<String> xVals ;
 
+    private float amortizedGPA ;
+
     @Override
     protected void onStart() {
         super.onStart();
@@ -91,6 +93,8 @@ public class MainActivity extends AppCompatActivity {
 
     @Subscribe
     public void updateChartFromGPA(DataUpdateEvent dataUpdateEvent){
+
+        amortizedGPA = new CalculateAmortizedGPA().getAmortizedGPA(GPAList.newInstance().getGpaList()) ;
         updateChartData(dataUpdateEvent.getDataValue(), dataUpdateEvent.getDataIndex());
         customViewPager.setCurrentItem(customViewPager.getCurrentItem()+1);
     }
