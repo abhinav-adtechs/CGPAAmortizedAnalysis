@@ -8,15 +8,21 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class AlertDialogFragment extends DialogFragment{
 
+    private static final String TAG = "SPECIAL TAG";
     private List<EstimatedList> estimatedLists = new ArrayList<>();
     private RecyclerView recyclerView ;
     private AmortizedAdapter amortizedAdapter ;
@@ -24,6 +30,13 @@ public class AlertDialogFragment extends DialogFragment{
 
     static AlertDialogFragment newInstance(){
         return new AlertDialogFragment() ;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        EventBus.getDefault().register(this);
     }
 
     @Nullable
@@ -46,21 +59,19 @@ public class AlertDialogFragment extends DialogFragment{
 
     }
 
-    public void setListItem(ArrayList<GPAData> data){
-        arrayListData = data ;
+    @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
+    public void setListItem(DataListEvent dataListEvent){
+        arrayListData = dataListEvent.getGpaDataArrayList() ;
+        for (int i = 0; i < arrayListData.size(); i++) {
+            Log.d(TAG, "setListItem: " + arrayListData.get(i).getSemGPA());
+        }
     }
 
     private void setData() {
-        /////SAMPLE DATA
 
-        ArrayList<GPAData> gpaDatas = new ArrayList<>() ;
-        gpaDatas.add(new GPAData(Float.parseFloat("9.4"), 24, 1));
-        gpaDatas.add(new GPAData(Float.parseFloat("9.3"), 26, 2));
-        gpaDatas.add(new GPAData(Float.parseFloat("9.2"), 24, 3));
-        gpaDatas.add(new GPAData(Float.parseFloat("9.0"), 24, 4));
 
         for (int i = 16; i <=27 ; i++) {
-            estimatedLists.add(new EstimatedList(i, new CalculateAmortizedGPA(gpaDatas).getMinPredictedGPA(i) ));
+            estimatedLists.add(new EstimatedList(i, new CalculateAmortizedGPA(arrayListData).getMinPredictedGPA(i) ));
         }
 
         amortizedAdapter.notifyDataSetChanged();
@@ -69,5 +80,11 @@ public class AlertDialogFragment extends DialogFragment{
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         return new Dialog(getActivity()) ;
+    }
+
+    @Override
+    public void onDetach() {
+        EventBus.getDefault().unregister(this);
+        super.onDetach();
     }
 }

@@ -122,8 +122,12 @@ public class MainActivity extends AppCompatActivity {
         tempCGPA = new CalculateCGPA(gpaDataArrayList).getCGPA() ;
         updateChartData(dataUpdateEvent.getDataValue(), dataUpdateEvent.getDataIndex());
         customViewPager.setCurrentItem(customViewPager.getCurrentItem()+1);
+
+        EventBus.getDefault().postSticky(new DataListEvent(gpaDataArrayList));
+
         DialogFragment dialogFragment = AlertDialogFragment.newInstance() ;
         dialogFragment.show(getFragmentManager(), "TAG") ;
+
         printArrayList();
     }
 

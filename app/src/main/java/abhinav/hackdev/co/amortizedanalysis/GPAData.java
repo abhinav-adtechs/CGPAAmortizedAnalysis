@@ -35,4 +35,5 @@ public class GPAData {
     public void setSemVal(int semVal) {
         this.semVal = semVal;
     }
+
 }
