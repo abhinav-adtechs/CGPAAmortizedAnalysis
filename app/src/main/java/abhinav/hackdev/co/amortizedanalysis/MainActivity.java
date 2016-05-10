@@ -3,6 +3,8 @@ package abhinav.hackdev.co.amortizedanalysis;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Html;
+import android.util.Log;
+import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.XAxis;
@@ -21,6 +23,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "TAG";
+    private TextView tvResults;
     private CustomAdapter customAdapter ;
     private CustomViewPager customViewPager ;
     private InkPageIndicator inkPageIndicator ;
@@ -28,8 +31,10 @@ public class MainActivity extends AppCompatActivity {
 
     private List<BarEntry> yVals ;
     private ArrayList<String> xVals ;
+    private ArrayList<GPAData> gpaDataArrayList;
 
     private float amortizedGPA ;
+    private float tempCGPA ;
 
     @Override
     protected void onStart() {
@@ -44,12 +49,16 @@ public class MainActivity extends AppCompatActivity {
 
         getSupportActionBar().setTitle(Html.fromHtml("<font color='#ffffff'>AmortizedAnalysis </font>"));
 
+        tvResults = (TextView) findViewById(R.id.estimated_gpa) ;
         inkPageIndicator = (InkPageIndicator)findViewById(R.id.indicator) ;
         customViewPager = (CustomViewPager) findViewById(R.id.main_viewpager) ;
         customAdapter = new CustomAdapter(getFragmentManager()) ;
         customViewPager.setAdapter(customAdapter);
         inkPageIndicator.setViewPager(customViewPager);
         barChart = (BarChart) findViewById(R.id.chart) ;
+
+        gpaDataArrayList = new ArrayList<>() ;
+
         chartHandling() ;
     }
 
@@ -75,9 +84,6 @@ public class MainActivity extends AppCompatActivity {
 
         yVals = new ArrayList<>();
 
-       /* for(int j=1 ; j< 9 ; j++){
-            updateChartData(j*2, j-1);
-        }*/
 
 
     }
@@ -101,10 +107,12 @@ public class MainActivity extends AppCompatActivity {
 
     @Subscribe
     public void updateChartFromGPA(DataUpdateEvent dataUpdateEvent){
-
-        amortizedGPA = new CalculateAmortizedGPA().getAmortizedGPA(GPAList.newInstance().getGpaList()) ;
+        gpaDataArrayList.add(new GPAData(dataUpdateEvent.getDataValue(), dataUpdateEvent.getDataCredits(), dataUpdateEvent.getDataIndex())) ;
+        tempCGPA = new CalculateCGPA(gpaDataArrayList).getCGPA() ;
+        //amortizedGPA = new CalculateAmortizedGPA().getAmortizedGPA(GPAList.newInstance().getGpaList()) ;
         updateChartData(dataUpdateEvent.getDataValue(), dataUpdateEvent.getDataIndex());
         customViewPager.setCurrentItem(customViewPager.getCurrentItem()+1);
+        printArrayList();
     }
 
     @Override
@@ -116,5 +124,22 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+    }
+
+    private void printArrayList(){
+        for (int i = 0; i < gpaDataArrayList.size(); i++) {
+            Log.d(TAG, "printArrayList: " +
+                gpaDataArrayList.get(i).getSemVal() + " " +
+                gpaDataArrayList.get(i).getSemGPA() + " " +
+                gpaDataArrayList.get(i).getSemCreds()
+            );
+        }
+
+        Log.d(TAG, "TempCGPA: " + tempCGPA);
+        if(tempCGPA > 9){
+            tvResults.setText("Go and Explore the world! CGPA: " + tempCGPA);
+        }else {
+            tvResults.setText("Start Studying! CGPA: " + tempCGPA);
+        }
     }
 }

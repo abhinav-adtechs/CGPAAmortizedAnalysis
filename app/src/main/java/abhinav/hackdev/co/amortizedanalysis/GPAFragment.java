@@ -17,7 +17,7 @@ import org.greenrobot.eventbus.EventBus;
 
 public class GPAFragment extends Fragment implements View.OnClickListener{
 
-    private static final String TAG = "GALAT BAAT BETA";
+    private static final String TAG = "TAG";
     private TextView textView ;
     private Button btnGPA ;
     private EditText etGPA ;
@@ -60,19 +60,19 @@ public class GPAFragment extends Fragment implements View.OnClickListener{
     @Override
     public void onClick(View v) {
         if(v.getId() == R.id.button) {
-            if (!etGPA.getText().toString().isEmpty() && Float.parseFloat(etGPA.getText().toString()) <= 10 && Float.parseFloat(etGPA.getText().toString()) >= 0) {
+            Log.d(TAG, "onClick: " + etCredits.getText().toString());
+            if (!etGPA.getText().toString().isEmpty() && !etCredits.getText().toString().isEmpty() && Float.parseFloat(etGPA.getText().toString()) <= 10 && Float.parseFloat(etGPA.getText().toString()) >= 0) {
                     GPAList.newInstance().addToList(
                             Float.parseFloat(etGPA.getText().toString()),
-                            Integer.getInteger(etCredits.getText().toString()),
+                            Integer.valueOf(etCredits.getText().toString()),
                             position);
                     EventBus.getDefault().post(
                             new DataUpdateEvent(Float.parseFloat(etGPA.getText().toString()),
-                                    Integer.getInteger(etCredits.getText().toString()),
+                                    Integer.valueOf(etCredits.getText().toString()),
                                     position));
             }
             else{
-                Log.d(TAG, "onClick: ");
-                Toast.makeText(getActivity(), "CGPA OUT OF BOUNDS!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "INVALID INPUTS!", Toast.LENGTH_SHORT).show();
             }
         }
     }

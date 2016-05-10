@@ -13,9 +13,9 @@ public class CalculateAmortizedGPA {
         return (9*semCount) - currentCGPA ;
     }
 
-    public float getAmortizedGPA(List<Float> gpaList){
+   /* public float getAmortizedGPA(List<Float> gpaList){
         Log.d(TAG, "getAmortizedGPA: " + returnRequiredGPA(new CalculateCGPA(gpaList).getCGPA(), gpaList.size()));
         return returnRequiredGPA(new CalculateCGPA(gpaList).getCGPA(), gpaList.size()) ;
-    }
+    }*/
 
 }
