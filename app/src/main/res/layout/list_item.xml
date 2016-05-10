@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:weightSum="4"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:text="if no. of credits taken:"
+        android:padding="9dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:textAlignment="center"
+        android:layout_width="0dp"
+        android:layout_height="match_parent" />
+
+    <TextView
+        android:id="@+id/list_creds"
+        android:text="24"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:textAlignment="center"
+        android:layout_width="0dp"
+        android:layout_height="match_parent" />
+
+    <TextView
+        android:text="then GPA should be atleast: "
+        android:layout_weight="1"
+        android:gravity="center"
+        android:textAlignment="center"
+        android:layout_width="0dp"
+        android:layout_height="match_parent" />
+
+    <TextView
+        android:id="@+id/list_gpa"
+        android:layout_weight="1"
+        android:text="9.22"
+        android:gravity="center"
+        android:textAlignment="center"
+        android:layout_width="0dp"
+        android:layout_height="match_parent" />
+
+</LinearLayout>

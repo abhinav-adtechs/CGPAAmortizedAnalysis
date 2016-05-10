@@ -3,19 +3,34 @@ package abhinav.hackdev.co.amortizedanalysis;
 
 import android.util.Log;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CalculateAmortizedGPA {
 
     private static final String TAG = "TAG";
 
-    public float returnRequiredGPA(float currentCGPA, int semCount){
-        return (9*semCount) - currentCGPA ;
+    private ArrayList<GPAData> gpaDataArrayList ;
+    private float currentCGPA ;
+
+    public CalculateAmortizedGPA(ArrayList<GPAData> gpaDataArrayList) {
+        this.gpaDataArrayList = gpaDataArrayList;
+        currentCGPA = new CalculateCGPA(gpaDataArrayList).getCGPA() ;
     }
 
-   /* public float getAmortizedGPA(List<Float> gpaList){
-        Log.d(TAG, "getAmortizedGPA: " + returnRequiredGPA(new CalculateCGPA(gpaList).getCGPA(), gpaList.size()));
-        return returnRequiredGPA(new CalculateCGPA(gpaList).getCGPA(), gpaList.size()) ;
-    }*/
+    private int getCurrentTotalCreds(){
+        int sum = 0 ;
 
+        for (int i = 0; i < gpaDataArrayList.size(); i++) {
+            sum = sum + gpaDataArrayList.get(i).getSemCreds() ;
+        }
+        return sum ;
+    }
+
+    public float getMinPredictedGPA(int nextCreds){
+        float estimatedGPA ;
+        estimatedGPA = 9*(getCurrentTotalCreds() + nextCreds) - (getCurrentTotalCreds()*currentCGPA) ;
+        estimatedGPA = estimatedGPA/nextCreds ;
+        return estimatedGPA ;
+    }
 }

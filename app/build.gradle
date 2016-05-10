@@ -31,4 +31,6 @@ dependencies {
     compile 'com.android.support:support-v13:23.3.0'
     compile 'com.pacioianu.david:ink-page-indicator:1.1.1'
     compile 'org.greenrobot:eventbus:3.0.0'
+    compile 'com.android.support:recyclerview-v7:23.3.0'
+
 }

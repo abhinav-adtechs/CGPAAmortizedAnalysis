@@ -1,7 +1,9 @@
 package abhinav.hackdev.co.amortizedanalysis;
 
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.util.Log;
 import android.widget.TextView;
@@ -109,7 +111,6 @@ public class MainActivity extends AppCompatActivity {
     public void updateChartFromGPA(DataUpdateEvent dataUpdateEvent){
         gpaDataArrayList.add(new GPAData(dataUpdateEvent.getDataValue(), dataUpdateEvent.getDataCredits(), dataUpdateEvent.getDataIndex())) ;
         tempCGPA = new CalculateCGPA(gpaDataArrayList).getCGPA() ;
-        //amortizedGPA = new CalculateAmortizedGPA().getAmortizedGPA(GPAList.newInstance().getGpaList()) ;
         updateChartData(dataUpdateEvent.getDataValue(), dataUpdateEvent.getDataIndex());
         customViewPager.setCurrentItem(customViewPager.getCurrentItem()+1);
         printArrayList();
@@ -141,5 +142,13 @@ public class MainActivity extends AppCompatActivity {
         }else {
             tvResults.setText("Start Studying! CGPA: " + tempCGPA);
         }
+        createAlert() ;
+    }
+
+    private void createAlert() {
+
+        AlertDialog.Builder dailogBuilder = new AlertDialog.Builder(this) ;
+
+
     }
 }
