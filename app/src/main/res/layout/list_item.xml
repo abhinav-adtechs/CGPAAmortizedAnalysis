@@ -3,10 +3,10 @@
     android:orientation="horizontal"
     android:weightSum="4"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <TextView
-        android:text="if no. of credits taken:"
+        android:text="CREDITS:"
         android:padding="9dp"
         android:layout_weight="1"
         android:gravity="center"
@@ -24,7 +24,7 @@
         android:layout_height="match_parent" />
 
     <TextView
-        android:text="then GPA should be atleast: "
+        android:text="GPA: "
         android:layout_weight="1"
         android:gravity="center"
         android:textAlignment="center"

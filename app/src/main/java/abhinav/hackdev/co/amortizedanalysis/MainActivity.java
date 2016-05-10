@@ -1,11 +1,16 @@
 package abhinav.hackdev.co.amortizedanalysis;
 
+import android.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.BarChart;
@@ -61,8 +66,11 @@ public class MainActivity extends AppCompatActivity {
 
         gpaDataArrayList = new ArrayList<>() ;
 
+
+
         chartHandling() ;
     }
+
 
     private void chartHandling() {
         barChart.setTouchEnabled(false);
@@ -91,8 +99,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void updateChartData(float val, int index){
-        yVals.add(new BarEntry(val, index)) ;
+        yVals.add(new BarEntry(val, index-1)) ;
 
+        Log.d(TAG, "updateChartData: " + val + index);
 
         BarDataSet barDataSet = new BarDataSet(yVals, "GPA") ;
 
@@ -113,6 +122,8 @@ public class MainActivity extends AppCompatActivity {
         tempCGPA = new CalculateCGPA(gpaDataArrayList).getCGPA() ;
         updateChartData(dataUpdateEvent.getDataValue(), dataUpdateEvent.getDataIndex());
         customViewPager.setCurrentItem(customViewPager.getCurrentItem()+1);
+        DialogFragment dialogFragment = AlertDialogFragment.newInstance() ;
+        dialogFragment.show(getFragmentManager(), "TAG") ;
         printArrayList();
     }
 
@@ -142,13 +153,6 @@ public class MainActivity extends AppCompatActivity {
         }else {
             tvResults.setText("Start Studying! CGPA: " + tempCGPA);
         }
-        createAlert() ;
     }
 
-    private void createAlert() {
-
-        AlertDialog.Builder dailogBuilder = new AlertDialog.Builder(this) ;
-
-
-    }
 }
