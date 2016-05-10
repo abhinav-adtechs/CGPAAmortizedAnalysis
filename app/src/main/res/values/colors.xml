@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#34495e</color>
-    <color name="colorPrimaryDark">#2c3e50</color>
-    <color name="colorAccent">#f39c12</color>
+    <color name="colorPrimary">#B71C1C</color>
+    <color name="colorPrimaryDark">#B71C1C</color>
+    <color name="colorAccent">#FF847C</color>
+    <color name="black">#000000</color>
+    <color name="background_dark">#2A363B</color>
+    <color name="pomegranate">#c0392b</color>
+    <color name="nephritis">#27ae60</color>
+    <color name="white">#FFFFFF</color>
+    <color name="midnight_blue">#2c3e50</color>
 </resources>

@@ -27,7 +27,8 @@ public class GPAList {
     }
 
 
-    public static void addToList(float gpaData, int position){
+    public static void addToList(float gpaData, int creds, int position){
         gpaList.add(position-1, gpaData) ;
+        Log.d(TAG, "addToList: " + GPAList.newInstance().toString());
     }
 }

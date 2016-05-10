@@ -2,6 +2,7 @@ package abhinav.hackdev.co.amortizedanalysis;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Html;
 
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.XAxis;
@@ -41,6 +42,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        getSupportActionBar().setTitle(Html.fromHtml("<font color='#ffffff'>AmortizedAnalysis </font>"));
+
         inkPageIndicator = (InkPageIndicator)findViewById(R.id.indicator) ;
         customViewPager = (CustomViewPager) findViewById(R.id.main_viewpager) ;
         customAdapter = new CustomAdapter(getFragmentManager()) ;
@@ -51,9 +54,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void chartHandling() {
-        barChart.setBackgroundColor(getResources().getColor(R.color.colorAccent));
-        barChart.setTouchEnabled(true);
+        barChart.setTouchEnabled(false);
         barChart.setDrawGridBackground(false);
+        barChart.setBorderColor(getResources().getColor(R.color.black));
+
+        barChart.setPadding(0,0,0,0);
         XAxis xAxis = barChart.getXAxis() ;
         YAxis yAxis = barChart.getAxisLeft() ;
         yAxis.setAxisLineColor(getResources().getColor(R.color.colorPrimaryDark));
@@ -82,6 +87,9 @@ public class MainActivity extends AppCompatActivity {
 
 
         BarDataSet barDataSet = new BarDataSet(yVals, "GPA") ;
+
+        barDataSet.setBarShadowColor(getResources().getColor(R.color.black));
+        barDataSet.setColor(getResources().getColor(R.color.colorPrimary));
         BarData barData = new BarData(xVals, barDataSet) ;
 
         barChart.setData(barData);
@@ -100,8 +108,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onDestroy() {
+    protected void onPause() {
         EventBus.getDefault().unregister(this);
+        super.onPause();
+    }
+
+    @Override
+    protected void onDestroy() {
         super.onDestroy();
     }
 }
