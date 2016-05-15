@@ -28,8 +28,12 @@ public class AmortizedAdapter extends RecyclerView.Adapter<AmortizedAdapter.List
     @Override
     public void onBindViewHolder(ListHolder holder, int position) {
         EstimatedList estimatedList = estimatedLists.get(position) ;
-        holder.tvGPA.setText(String.valueOf(estimatedList.getEstGPA()));
         holder.tvCreds.setText(String.valueOf(estimatedList.getEstCreds()));
+        if(estimatedList.getEstGPA() > 10){
+            holder.tvGPA.setText("Above 10");
+        }else {
+            holder.tvGPA.setText(String.valueOf(estimatedList.getEstGPA()));
+        }
     }
 
     @Override
