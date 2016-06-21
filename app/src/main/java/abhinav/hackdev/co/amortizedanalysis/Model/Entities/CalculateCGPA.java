@@ -1,10 +1,9 @@
-package abhinav.hackdev.co.amortizedanalysis;
+package abhinav.hackdev.co.amortizedanalysis.Model.Entities;
 
 
 import android.util.Log;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class CalculateCGPA {
 

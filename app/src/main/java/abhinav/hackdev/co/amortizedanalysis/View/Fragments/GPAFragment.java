@@ -1,4 +1,4 @@
-package abhinav.hackdev.co.amortizedanalysis;
+package abhinav.hackdev.co.amortizedanalysis.View.Fragments;
 
 
 import android.app.Fragment;
@@ -14,6 +14,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import org.greenrobot.eventbus.EventBus;
+
+import abhinav.hackdev.co.amortizedanalysis.Model.Entities.GPAList;
+import abhinav.hackdev.co.amortizedanalysis.Model.EventBusEvents.DataUpdateEvent;
+import abhinav.hackdev.co.amortizedanalysis.R;
 
 public class GPAFragment extends Fragment implements View.OnClickListener{
 

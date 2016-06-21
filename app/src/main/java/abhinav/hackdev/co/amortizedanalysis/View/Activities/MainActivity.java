@@ -1,16 +1,10 @@
-package abhinav.hackdev.co.amortizedanalysis;
+package abhinav.hackdev.co.amortizedanalysis.View.Activities;
 
 import android.app.DialogFragment;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
 import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.BarChart;
@@ -26,6 +20,15 @@ import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import abhinav.hackdev.co.amortizedanalysis.Controller.CustomAdapter;
+import abhinav.hackdev.co.amortizedanalysis.Model.Entities.GPAData;
+import abhinav.hackdev.co.amortizedanalysis.Model.Entities.CalculateCGPA;
+import abhinav.hackdev.co.amortizedanalysis.Model.EventBusEvents.DataListEvent;
+import abhinav.hackdev.co.amortizedanalysis.Model.EventBusEvents.DataUpdateEvent;
+import abhinav.hackdev.co.amortizedanalysis.R;
+import abhinav.hackdev.co.amortizedanalysis.View.CustomViews.CustomViewPager;
+import abhinav.hackdev.co.amortizedanalysis.View.Fragments.AlertDialogFragment;
 
 public class MainActivity extends AppCompatActivity {
 

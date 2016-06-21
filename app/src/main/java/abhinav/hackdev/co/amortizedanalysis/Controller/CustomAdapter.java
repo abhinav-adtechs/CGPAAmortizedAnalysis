@@ -1,6 +1,8 @@
-package abhinav.hackdev.co.amortizedanalysis;
+package abhinav.hackdev.co.amortizedanalysis.Controller;
 
 import android.os.Bundle;
+
+import abhinav.hackdev.co.amortizedanalysis.View.Fragments.GPAFragment;
 
 
 public class CustomAdapter extends android.support.v13.app.FragmentPagerAdapter {

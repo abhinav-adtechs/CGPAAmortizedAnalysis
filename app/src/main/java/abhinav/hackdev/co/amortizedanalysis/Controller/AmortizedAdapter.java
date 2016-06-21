@@ -1,4 +1,4 @@
-package abhinav.hackdev.co.amortizedanalysis;
+package abhinav.hackdev.co.amortizedanalysis.Controller;
 
 
 import android.support.v7.widget.RecyclerView;
@@ -8,6 +8,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.util.List;
+
+import abhinav.hackdev.co.amortizedanalysis.Model.Entities.EstimatedList;
+import abhinav.hackdev.co.amortizedanalysis.R;
 
 public class AmortizedAdapter extends RecyclerView.Adapter<AmortizedAdapter.ListHolder>{
 

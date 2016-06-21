@@ -1,4 +1,4 @@
-package abhinav.hackdev.co.amortizedanalysis;
+package abhinav.hackdev.co.amortizedanalysis.Model.Entities;
 
 public class GPAData {
 

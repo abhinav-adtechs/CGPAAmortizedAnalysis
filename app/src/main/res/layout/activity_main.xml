@@ -7,16 +7,16 @@
     android:weightSum="20"
     android:padding="10dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="abhinav.hackdev.co.amortizedanalysis.MainActivity">
+    tools:context=".View.Activities.MainActivity">
 
-    <abhinav.hackdev.co.amortizedanalysis.CustomViewPager
+    <abhinav.hackdev.co.amortizedanalysis.View.CustomViews.CustomViewPager
         android:elevation="7dp"
         android:paddingBottom="3dp"
         android:id="@+id/main_viewpager"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="10">
-    </abhinav.hackdev.co.amortizedanalysis.CustomViewPager>
+    </abhinav.hackdev.co.amortizedanalysis.View.CustomViews.CustomViewPager>
 
     <com.pixelcan.inkpageindicator.InkPageIndicator
         android:id="@+id/indicator"

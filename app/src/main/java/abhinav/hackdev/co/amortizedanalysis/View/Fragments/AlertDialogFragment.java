@@ -1,4 +1,4 @@
-package abhinav.hackdev.co.amortizedanalysis;
+package abhinav.hackdev.co.amortizedanalysis.View.Fragments;
 
 
 import android.app.Dialog;
@@ -20,6 +20,13 @@ import org.greenrobot.eventbus.ThreadMode;
 import java.util.ArrayList;
 import java.util.List;
 
+import abhinav.hackdev.co.amortizedanalysis.Controller.AmortizedAdapter;
+import abhinav.hackdev.co.amortizedanalysis.Model.Entities.CalculateAmortizedGPA;
+import abhinav.hackdev.co.amortizedanalysis.Model.EventBusEvents.DataListEvent;
+import abhinav.hackdev.co.amortizedanalysis.Model.Entities.EstimatedList;
+import abhinav.hackdev.co.amortizedanalysis.Model.Entities.GPAData;
+import abhinav.hackdev.co.amortizedanalysis.R;
+
 public class AlertDialogFragment extends DialogFragment{
 
     private static final String TAG = "SPECIAL TAG";
@@ -28,7 +35,7 @@ public class AlertDialogFragment extends DialogFragment{
     private AmortizedAdapter amortizedAdapter ;
     private ArrayList<GPAData> arrayListData ;
 
-    static AlertDialogFragment newInstance(){
+    public static AlertDialogFragment newInstance(){
         return new AlertDialogFragment() ;
     }
 

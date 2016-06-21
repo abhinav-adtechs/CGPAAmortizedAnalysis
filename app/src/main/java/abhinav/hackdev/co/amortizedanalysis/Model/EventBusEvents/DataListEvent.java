@@ -1,7 +1,9 @@
-package abhinav.hackdev.co.amortizedanalysis;
+package abhinav.hackdev.co.amortizedanalysis.Model.EventBusEvents;
 
 
 import java.util.ArrayList;
+
+import abhinav.hackdev.co.amortizedanalysis.Model.Entities.GPAData;
 
 public class DataListEvent {
 

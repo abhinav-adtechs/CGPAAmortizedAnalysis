@@ -1,4 +1,4 @@
-package abhinav.hackdev.co.amortizedanalysis;
+package abhinav.hackdev.co.amortizedanalysis.View.Fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,6 +9,12 @@ import android.support.v7.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import abhinav.hackdev.co.amortizedanalysis.Controller.AmortizedAdapter;
+import abhinav.hackdev.co.amortizedanalysis.Model.Entities.CalculateAmortizedGPA;
+import abhinav.hackdev.co.amortizedanalysis.Model.Entities.EstimatedList;
+import abhinav.hackdev.co.amortizedanalysis.Model.Entities.GPAData;
+import abhinav.hackdev.co.amortizedanalysis.R;
 
 
 public class AlertFragment extends AppCompatActivity{
