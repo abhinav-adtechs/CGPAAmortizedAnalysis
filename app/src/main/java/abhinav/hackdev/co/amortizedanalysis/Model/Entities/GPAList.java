@@ -28,7 +28,11 @@ public class GPAList {
 
 
     public static void addToList(float gpaData, int creds, int position){
-        gpaList.add(position-1, gpaData) ;
+        // Keep each list index tied to its semester, even when a semester is skipped.
+        while (gpaList.size() < position) {
+            gpaList.add(null);
+        }
+        gpaList.set(position - 1, gpaData);
         Log.d(TAG, "addToList: " + GPAList.newInstance().toString());
     }
 }
