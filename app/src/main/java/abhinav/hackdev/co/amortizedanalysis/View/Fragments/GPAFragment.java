@@ -4,7 +4,6 @@ package abhinav.hackdev.co.amortizedanalysis.View.Fragments;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,7 +20,7 @@ import abhinav.hackdev.co.amortizedanalysis.R;
 
 public class GPAFragment extends Fragment implements View.OnClickListener{
 
-    private static final String TAG = "TAG";
+    private static final int MAX_SEMESTER_CREDITS = 40;
     private TextView textView ;
     private Button btnGPA ;
     private EditText etGPA ;
@@ -63,21 +62,30 @@ public class GPAFragment extends Fragment implements View.OnClickListener{
 
     @Override
     public void onClick(View v) {
-        if(v.getId() == R.id.button) {
-            Log.d(TAG, "onClick: " + etCredits.getText().toString());
-            if (!etGPA.getText().toString().isEmpty() && !etCredits.getText().toString().isEmpty() && Float.parseFloat(etGPA.getText().toString()) <= 10 && Float.parseFloat(etGPA.getText().toString()) >= 0) {
-                    GPAList.newInstance().addToList(
-                            Float.parseFloat(etGPA.getText().toString()),
-                            Integer.valueOf(etCredits.getText().toString()),
-                            position);
-                    EventBus.getDefault().post(
-                            new DataUpdateEvent(Float.parseFloat(etGPA.getText().toString()),
-                                    Integer.valueOf(etCredits.getText().toString()),
-                                    position));
-            }
-            else{
-                Toast.makeText(getActivity(), "INVALID INPUTS!", Toast.LENGTH_SHORT).show();
-            }
+        if (v.getId() != R.id.button) {
+            return;
         }
+
+        float gpa;
+        int credits;
+        try {
+            gpa = Float.parseFloat(etGPA.getText().toString());
+            credits = Integer.parseInt(etCredits.getText().toString());
+        } catch (NumberFormatException e) {
+            showInvalidInputs();
+            return;
+        }
+
+        if (Float.isNaN(gpa) || gpa < 0 || gpa > 10 || credits < 1 || credits > MAX_SEMESTER_CREDITS) {
+            showInvalidInputs();
+            return;
+        }
+
+        GPAList.newInstance().addToList(gpa, credits, position);
+        EventBus.getDefault().post(new DataUpdateEvent(gpa, credits, position));
+    }
+
+    private void showInvalidInputs() {
+        Toast.makeText(getActivity(), "INVALID INPUTS!", Toast.LENGTH_SHORT).show();
     }
 }
